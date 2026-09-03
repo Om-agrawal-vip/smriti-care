@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, VolumeX, HelpCircle, Sparkles } from 'lucide-react';
+import { Volume2, VolumeX } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import AppTutorialGuide from './AppTutorialGuide';
 
@@ -10,7 +10,7 @@ export const Layout = ({ children }) => {
   const { soundEnabled, toggleSound, openOverviewModal } = useApp();
 
   return (
-    <div className="min-h-screen w-full text-slate-800 flex flex-col justify-center items-center relative overflow-hidden selection:bg-[#4A7C7C]/30">
+    <div className="min-h-screen w-full text-slate-800 flex flex-col items-center relative overflow-x-hidden selection:bg-[#4A7C7C]/30 bg-[#FAF5EE]">
       {/* Top Right Floating Controls (Guide / Tutorial + Sound Toggle) */}
       <div className="fixed top-5 right-5 z-40 flex items-center gap-2.5">
         {/* Interactive App Guide / Tutorial Button */}
@@ -29,11 +29,7 @@ export const Layout = ({ children }) => {
           <span className="text-xs font-black tracking-wide hidden sm:inline text-[#1E5F60] group-hover:text-teal-700">
             Guide / ट्यूटोरियल
           </span>
-          <motion.div
-            animate={{ scale: [1, 1.25, 1], opacity: [0.6, 1, 0.6] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-2 h-2 rounded-full bg-amber-400"
-          />
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
         </motion.button>
 
         {/* Floating Sound On/Off Toggle */}
@@ -56,85 +52,32 @@ export const Layout = ({ children }) => {
 
       {/* 
         =======================================================================
-        1. VIBRANT LIVING AURORA MESH CANVAS
+        1. VIBRANT LIVING AURORA MESH CANVAS (HIGH PERFORMANCE, ZERO BLINK)
         =======================================================================
       */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-gradient-to-br from-[#FAF5EE] via-[#F0F7F4] to-[#FBF0E8]">
-        {/* Blob 1: Deep Ocean Teal (#1E5F60) - Top Left drifting */}
-        <motion.div
-          animate={{
-            x: [-60, 120, 30, -90, -60],
-            y: [-40, 80, 140, 20, -40],
-            scale: [1, 1.25, 0.9, 1.15, 1],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-gradient-to-tr from-[#1E5F60] to-[#2E8B8B] opacity-50 blur-[90px] transform-gpu"
+        {/* Blob 1: Deep Ocean Teal (#1E5F60) */}
+        <div
+          className="absolute -top-24 -left-24 w-[600px] h-[600px] rounded-full radial-blob-teal opacity-45 transform-gpu animate-float-slow"
+          style={{ willChange: 'transform, opacity' }}
         />
 
-        {/* Blob 2: Lush Tropical Sage & Emerald (#489E68) - Bottom Right */}
-        <motion.div
-          animate={{
-            x: [50, -130, -30, 90, 50],
-            y: [30, -90, -140, -40, 30],
-            scale: [1, 1.2, 0.88, 1.18, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            delay: 1,
-            ease: 'easeInOut',
-          }}
-          className="absolute -bottom-36 -right-32 w-[750px] h-[750px] rounded-full bg-gradient-to-bl from-[#3D8F5A] via-[#7CBF6B] to-[#4A937D] opacity-55 blur-[100px] transform-gpu"
+        {/* Blob 2: Lush Tropical Sage & Emerald (#489E68) */}
+        <div
+          className="absolute -bottom-28 -right-24 w-[650px] h-[650px] rounded-full radial-blob-sage opacity-50 transform-gpu animate-float-reverse"
+          style={{ willChange: 'transform, opacity' }}
         />
 
-        {/* Blob 3: Radiant Sunset Coral & Gold (#F37055) - Top Right */}
-        <motion.div
-          animate={{
-            x: [40, -100, -160, 50, 40],
-            y: [-30, 70, -20, 80, -30],
-            scale: [1, 1.3, 1.05, 0.92, 1],
-          }}
-          transition={{
-            duration: 11,
-            repeat: Infinity,
-            delay: 0.5,
-            ease: 'easeInOut',
-          }}
-          className="absolute -top-24 right-[5%] w-[620px] h-[620px] rounded-full bg-gradient-to-br from-[#F37055] via-[#F89C58] to-[#FFD166] opacity-50 blur-[90px] transform-gpu"
+        {/* Blob 3: Radiant Sunset Coral & Gold (#F37055) */}
+        <div
+          className="absolute -top-16 right-[10%] w-[520px] h-[520px] rounded-full radial-blob-coral opacity-40 transform-gpu animate-pulse-gentle"
+          style={{ willChange: 'opacity' }}
         />
 
-        {/* Blob 4: Mystical Assam Dusk Violet & Indigo (#6A4C93) - Bottom Left */}
-        <motion.div
-          animate={{
-            x: [-40, 90, 140, -40, -40],
-            y: [50, -50, 40, -80, 50],
-            scale: [1, 1.18, 1.28, 0.95, 1],
-          }}
-          transition={{
-            duration: 16,
-            repeat: Infinity,
-            delay: 2,
-            ease: 'easeInOut',
-          }}
-          className="absolute -bottom-24 left-[8%] w-[650px] h-[650px] rounded-full bg-gradient-to-tr from-[#6A4C93] via-[#8B5FBF] to-[#5390D9] opacity-45 blur-[95px] transform-gpu"
-        />
-
-        {/* Floating Center Glow */}
-        <motion.div
-          animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.35, 0.55, 0.35],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-[#2A9D8F] via-[#E76F51] to-[#E9C46A] opacity-40 blur-[110px] transform-gpu"
+        {/* Blob 4: Mystical Assam Dusk Violet & Indigo (#6A4C93) */}
+        <div
+          className="absolute -bottom-16 left-[10%] w-[550px] h-[550px] rounded-full radial-blob-purple opacity-35 transform-gpu animate-float-slow"
+          style={{ willChange: 'transform, opacity' }}
         />
 
         {/* 
@@ -143,7 +86,7 @@ export const Layout = ({ children }) => {
           =======================================================================
         */}
         <svg
-          className="absolute inset-0 w-full h-full pointer-events-none stroke-[#1E5F60] opacity-[0.05]"
+          className="absolute inset-0 w-full h-full pointer-events-none stroke-[#1E5F60] opacity-[0.04]"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
@@ -160,21 +103,18 @@ export const Layout = ({ children }) => {
           </defs>
           <rect width="100%" height="100%" fill="url(#ne-weave-motif)" />
         </svg>
-
-        {/* Subtle Film Grain Noise Texture */}
-        <div className="absolute inset-0 bg-noise opacity-30 mix-blend-overlay pointer-events-none" />
       </div>
 
       {/* Main Content Area */}
-      <main className="w-full flex-1 flex flex-col justify-center items-center z-10 relative">
+      <main className="w-full flex-1 flex flex-col items-center justify-start z-10 relative">
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -14 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full flex-1 flex flex-col items-center justify-center"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="w-full flex-1 flex flex-col items-center justify-start"
           >
             {children}
           </motion.div>

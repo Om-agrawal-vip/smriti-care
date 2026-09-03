@@ -687,7 +687,7 @@ export const AppTutorialGuide = () => {
     }
   }, [hasPromptedNewUser]);
 
-  // Update target rect coordinates
+  // Update target rect coordinates & position
   useEffect(() => {
     if (!isTourOpen) {
       setTargetRect(null);
@@ -718,20 +718,40 @@ export const AppTutorialGuide = () => {
           rawTop: rect.top,
           rawLeft: rect.left,
         });
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         setTargetRect(null);
       }
     };
 
-    const timer = setTimeout(updateRect, 250);
-    window.addEventListener('resize', updateRect);
-    window.addEventListener('scroll', updateRect);
+    // Scroll into view gently only ONCE when step changes
+    const initialTimer = setTimeout(() => {
+      if (currentStep.targetId) {
+        const el = document.getElementById(currentStep.targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+      updateRect();
+    }, 200);
+
+    let resizeThrottleTimer = null;
+    const throttledUpdateRect = () => {
+      if (!resizeThrottleTimer) {
+        resizeThrottleTimer = setTimeout(() => {
+          resizeThrottleTimer = null;
+          updateRect();
+        }, 100);
+      }
+    };
+
+    window.addEventListener('resize', throttledUpdateRect, { passive: true });
+    window.addEventListener('scroll', throttledUpdateRect, { passive: true });
 
     return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', updateRect);
-      window.removeEventListener('scroll', updateRect);
+      clearTimeout(initialTimer);
+      if (resizeThrottleTimer) clearTimeout(resizeThrottleTimer);
+      window.removeEventListener('resize', throttledUpdateRect);
+      window.removeEventListener('scroll', throttledUpdateRect);
     };
   }, [isTourOpen, tourStep, location.pathname, tourSteps]);
 

@@ -31,22 +31,58 @@
 
 /* Vibrant Mesh & Radial Gradient Blobs */
 .radial-blob-teal {
-  background: radial-gradient(circle at center, #4A7C7C 0%, rgba(74, 124, 124, 0.4) 45%, transparent 70%);
+  background: radial-gradient(circle at center, #1E5F60 0%, rgba(30, 95, 96, 0.4) 45%, transparent 70%);
 }
 
 .radial-blob-sage {
-  background: radial-gradient(circle at center, #8FA876 0%, rgba(143, 168, 118, 0.45) 45%, transparent 70%);
+  background: radial-gradient(circle at center, #3D8F5A 0%, rgba(61, 143, 90, 0.45) 45%, transparent 70%);
 }
 
 .radial-blob-coral {
-  background: radial-gradient(circle at center, #F4A261 0%, rgba(244, 162, 97, 0.4) 45%, transparent 70%);
+  background: radial-gradient(circle at center, #F37055 0%, rgba(243, 112, 85, 0.4) 45%, transparent 70%);
 }
 
 .radial-blob-purple {
-  background: radial-gradient(circle at center, #9B8AA0 0%, rgba(155, 138, 160, 0.4) 45%, transparent 70%);
+  background: radial-gradient(circle at center, #6A4C93 0%, rgba(106, 76, 147, 0.35) 45%, transparent 70%);
 }
 
-/* Subtle Film Grain Noise Texture */
-.bg-noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(30px, -25px, 0) scale(1.08);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-30px, 20px, 0) scale(1.06);
+  }
+}
+
+@keyframes pulseGentle {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.05);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 16s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 18s ease-in-out infinite;
+}
+
+.animate-pulse-gentle {
+  animation: pulseGentle 10s ease-in-out infinite;
 }
